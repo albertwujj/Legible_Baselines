@@ -10,7 +10,6 @@ from baselines.common import explained_variance
 
 # BIG PICTURE #
 
-# Model contains and trains value function and policy.
 # Model will be given steps of experience along with calculated advantages for each step's state-action pair,
 # and adjust its policy and value function accordingly.
 
