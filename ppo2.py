@@ -199,14 +199,10 @@ class Runner(object):
 
             # which is mathematically equivalent
             # to setting each step's advantage to it's one-step TD error plus the decayed advantage of the next step
-            # (where the last step's advantage is 0)
+            # (where the last step's advantage is 0):
             mb_advs[t] = lastgaelam = delta + self.gamma * self.lam * nextnonterminal * lastgaelam
-
             # see GAE paper
-
         mb_returns = mb_advs + mb_values
-
-
         return (*map(sf01, (mb_obs, mb_returns, mb_dones, mb_actions, mb_values, mb_neglogpacs)),
                 mb_states, epinfos)
 
