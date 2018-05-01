@@ -23,7 +23,6 @@ from baselines.common import explained_variance
 
 #####
 
-
 class Model(object):
     def __init__(self, *, policy, ob_space, ac_space, nbatch_act, nbatch_train,
                  nsteps, ent_coef, vf_coef, max_grad_norm):
@@ -74,8 +73,7 @@ class Model(object):
 
 
         # Sets loss to sum of policy loss and value loss
-        # with an additional term for maximizing entropy
-        # (theoretically, the more entropy the more information is contained)
+        # with an entropy bonus (improves exploration)
         loss = pg_loss - entropy * ent_coef + vf_loss * vf_coef
 
         # sets one call of sess.run() to apply the gradients minimizing the loss
