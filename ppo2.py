@@ -10,8 +10,8 @@ from baselines.common import explained_variance
 
 # BIG PICTURE #
 
-# Model will be given steps of experience along with calculated advantages for each step's state-action pair,
-# and adjust its policy and value function accordingly.
+# Model will be given steps of experience along with calculated values and advantages for each step's state-action pair,
+# and adjust its value function and policy accordingly.
 
 # Runner, for each call to run(), will run the agent, sampling the action from the Model's policy at each step,
 # calculating the advantage at each step's state-action pair,
