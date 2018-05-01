@@ -196,7 +196,6 @@ class Runner(object):
             # for any n, the n-step TD error from a step is an estimate for the advantage of the step
             # but it is biased because our values are not exact
             # so we take an exponentially-weighted average of all the n-step TD errors, as our adv estimate
-
             # which is mathematically equivalent
             # to setting each step's advantage to it's one-step TD error plus the decayed advantage of the next step
             # (where the last step's advantage is 0):
