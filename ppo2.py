@@ -310,13 +310,10 @@ def learn(*, policy, env, nsteps, total_timesteps, ent_coef, lr,
                 np.random.shuffle(envinds)
                 for start in range(0, nenvs, envsperbatch):
                     end = start + envsperbatch
-
                     # the randomnly selected environments for this minibatch
                     mbenvinds = envinds[start:end]
-
                     # all the steps of the randomly selected environments, put in one vector in order
                     mbflatinds = flatinds[mbenvinds].ravel()
-
                     slices = (arr[mbflatinds] for arr in (obs, returns, masks, actions, values, neglogpacs))
                     mbstates = states[mbenvinds]
                     mblossvals.append(model.train(lrnow, cliprangenow, *slices, mbstates))
