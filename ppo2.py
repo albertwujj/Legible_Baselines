@@ -53,7 +53,7 @@ class Model(object):
         entropy = tf.reduce_mean(train_model.pd.entropy())
 
         # Sets value loss to be 1/2 the greater of the mean squared difference between the old value
-        # and the unclipped vs clipped new value
+        # and the unclipped vs clipped new value (where R is the new value)
         vpred = train_model.vf
         vpredclipped = OLDVPRED + tf.clip_by_value(train_model.vf - OLDVPRED, - CLIPRANGE, CLIPRANGE)
         vf_losses1 = tf.square(vpred - R)
