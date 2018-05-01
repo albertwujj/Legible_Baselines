@@ -18,7 +18,7 @@ from baselines.common import explained_variance
 # calculating the advantage at each step's state-action pair,
 # and finally returning all steps (with associated info)
 
-# learn() will call Runner.run() once per iteration,
+# learn() will call Runner.run() once per "update",
 # and train the Model on all steps of experience (separated into minibatches) from that call, for a certain # of epochs
 
 #####
