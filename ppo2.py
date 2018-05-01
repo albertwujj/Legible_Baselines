@@ -201,9 +201,10 @@ class Runner(object):
             mb_advs[t] = lastgaelam = delta + self.gamma * self.lam * nextnonterminal * lastgaelam
             # see GAE paper
           
-        # the prior value plus our advantage estimate (for each step), 
-        # which was an exponentially weighted average over all n-step TD errors,
-        # is exactly the TD-lambda value estimate 
+        # for each step, its prior value plus its advantage estimate, 
+        # an exponentially weighted average over all n-step TD errors,
+        # is exactly the TD-lambda value estimate (by definition)
+        # so mb_returns becomes the new target values for our Model's value function.
         mb_returns = mb_advs + mb_values
         return (*map(sf01, (mb_obs, mb_returns, mb_dones, mb_actions, mb_values, mb_neglogpacs)),
                 mb_states, epinfos)
