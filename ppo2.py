@@ -200,6 +200,10 @@ class Runner(object):
             # (where the last step's advantage is 0):
             mb_advs[t] = lastgaelam = delta + self.gamma * self.lam * nextnonterminal * lastgaelam
             # see GAE paper
+          
+        # the prior value plus our advantage estimate (for each step), 
+        # which was an exponentially weighted average over all n-step TD errors,
+        # is exactly the TD-lambda value estimate 
         mb_returns = mb_advs + mb_values
         return (*map(sf01, (mb_obs, mb_returns, mb_dones, mb_actions, mb_values, mb_neglogpacs)),
                 mb_states, epinfos)
