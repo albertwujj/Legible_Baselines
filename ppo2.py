@@ -51,15 +51,13 @@ class Model(object):
         # entropy of policy output
         entropy = tf.reduce_mean(train_model.pd.entropy())
 
-        # Sets value loss to be 1/2 the greater of the mean squared difference between the curr value
-        # and the unclipped vs clipped new value (where R is the new value)
         vpred = train_model.vf
+         # model will minimize the clipped or the non-clipped loss, whichever is greater
         vpredclipped = OLDVPRED + tf.clip_by_value(train_model.vf - OLDVPRED, - CLIPRANGE, CLIPRANGE)
         vf_losses1 = tf.square(vpred - R)
         vf_losses2 = tf.square(vpredclipped - R)
         vf_loss = .5 * tf.reduce_mean(tf.maximum(vf_losses1, vf_losses2))
 
-        # Sets policy loss to be the greater of the loss using clipped ratio vs non-clipped ratio
         # Loss is negative of the objective function (from TRPO paper):
         #  ratio of prob. of action under new policy vs under curr policy, multiplied by advantage of action
         ratio = tf.exp(OLDNEGLOGPAC - neglogpac)
